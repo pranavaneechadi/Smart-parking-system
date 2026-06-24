@@ -227,7 +227,6 @@ const PaymentPage = () => {
                     </div>
                 </div>
 
-                {/* 🏆 PREMIUM RAZORPAY CLONE MODAL */}
                 {showDemoModal && (
                     <div className="premium-modal-overlay" style={{
                         position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -239,10 +238,9 @@ const PaymentPage = () => {
                             overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
                             animation: 'modalIn 0.3s ease-out', color: '#1e293b'
                         }}>
-                            {/* Header */}
                             <div style={{ background: '#2b2f3a', padding: '20px', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <div style={{ width: '32px', height: '32px', background: '#3b82f6', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyItems: 'center', fontWeight: 'bold', fontSize: '18px', justifyContent: 'center' }}>P</div>
+                                    <div style={{ width: '32px', height: '32px', background: '#3b82f6', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '18px' }}>P</div>
                                     <div>
                                         <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Smart Parking</div>
                                     </div>
@@ -250,15 +248,10 @@ const PaymentPage = () => {
                                 <div style={{ fontWeight: '800', fontSize: '18px' }}>₹{amountToPay}</div>
                             </div>
 
-                            {/* Options Body */}
                             <div style={{ padding: '24px' }}>
                                 <p style={{ fontSize: '12px', fontWeight: '600', color: '#64748b', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Payment Options</p>
 
-                                {[
-                                    { id: 'card', name: 'Card', sub: 'Visa, MasterCard, RuPay', icon: '💳' },
-                                    { id: 'upi', name: 'UPI', sub: 'Google Pay, PhonePe, Paytm', icon: '📱' },
-                                    { id: 'net', name: 'Netbanking', sub: 'All Indian Banks', icon: '🏦' },
-                                ].map(opt => (
+                                {[{ id: 'card', name: 'Card', sub: 'Visa, MasterCard, RuPay', icon: '💳' }, { id: 'upi', name: 'UPI', sub: 'Google Pay, PhonePe, Paytm', icon: '📱' }, { id: 'net', name: 'Netbanking', sub: 'All Indian Banks', icon: '🏦' }].map((opt) => (
                                     <div
                                         key={opt.id}
                                         onClick={() => handleSimulationResult(true, opt.id)}
@@ -290,7 +283,6 @@ const PaymentPage = () => {
                                 </button>
                             </div>
 
-                            {/* Footer */}
                             <div style={{ background: '#f8fafc', padding: '12px', textAlign: 'center', fontSize: '10px', color: '#94a3b8', borderTop: '1px solid #f1f5f9' }}>
                                 Secured by <span style={{ fontWeight: '800', color: '#2b2f3a' }}>RAZORPAY</span> • Built for Academic Demo
                             </div>
