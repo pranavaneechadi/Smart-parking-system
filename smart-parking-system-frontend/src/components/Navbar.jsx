@@ -11,9 +11,17 @@ const Navbar = () => {
     const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Don't show Navbar on login and register pages if not authenticated
-    // (App.js will handle conditional rendering, but this is a safety check)
-    if (!isAuthenticated && (location.pathname === '/login' || location.pathname === '/register')) {
+    // Don't show Navbar on auth pages if not authenticated
+    const isAuthPath = [
+        '/login', 
+        '/register', 
+        '/admin/login', 
+        '/admin/register', 
+        '/staff/login', 
+        '/staff/register'
+    ].includes(location.pathname);
+
+    if (!isAuthenticated && isAuthPath) {
         return null;
     }
 

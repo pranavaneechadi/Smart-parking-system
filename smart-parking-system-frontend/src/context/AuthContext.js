@@ -21,10 +21,10 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const register = async (name, email, phone, password) => {
+  const register = async (name, email, phone, password, role = 'user') => {
     try {
       setError(null);
-      const response = await authService.register({ name, email, phone, password });
+      const response = await authService.register({ name, email, phone, password, role });
       
       const { token, user } = response.data;
       setToken(token);

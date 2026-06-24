@@ -3,9 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/Auth.css';
 
-const Login = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -54,10 +54,10 @@ const Login = () => {
         const user = data.user;
         if (user?.role === 'admin') {
           navigate('/admin/dashboard');
-        } else if (user?.role === 'staff') {
-          navigate('/staff/dashboard');
         } else {
-          navigate('/bookings');
+          // Force logout because they aren't an admin
+          logout();
+          setError('You are not authorized to login as an admin. Please use the User or Staff login portals.');
         }
       } else {
         setError(data.message || 'Login failed. Please try again.');
@@ -73,9 +73,9 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-icon">🅿️</div>
+          <div className="auth-icon">🛡️</div>
           <h1>Smart Parking</h1>
-          <p>Welcome Back</p>
+          <p style={{ color: '#ec4899', fontWeight: 'bold' }}>Admin Portal</p>
         </div>
 
         {error && (
@@ -96,7 +96,7 @@ const Login = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
+                placeholder="Enter admin email"
                 disabled={loading}
                 autoComplete="email"
               />
@@ -113,7 +113,7 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Enter your password"
+                placeholder="Enter admin password"
                 disabled={loading}
                 autoComplete="current-password"
               />
@@ -132,37 +132,29 @@ const Login = () => {
             type="submit"
             className="auth-button"
             disabled={loading}
+            style={{ background: 'linear-gradient(135deg, #ec4899, #f43f5e)' }}
           >
             {loading ? (
               <>
                 <span className="spinner-small"></span>
-                'Signing in...'
+                Signing in...
               </>
             ) : (
-              'Sign In'
+              'Sign In as Admin'
             )}
           </button>
         </form>
 
-        <div className="auth-demo">
-          <p>Use your registered account to continue.</p>
-        </div>
-
         <div className="auth-footer">
           <p>
-            Don't have an account?{' '}
-            <Link to="/register" className="auth-link">
-              Sign up here
-            </Link>
-          </p>
-          <p>
-            <Link to="/forgot-password" className="auth-link">
-              Forgot password?
+            Need an Admin account?{' '}
+            <Link to="/admin/register" className="auth-link">
+              Register here
             </Link>
           </p>
           <p style={{ marginTop: '10px' }}>
-            Portals:{' '}
-            <Link to="/admin/login" className="auth-link">Admin Portal</Link>
+            Switch Portal:{' '}
+            <Link to="/login" className="auth-link">User Portal</Link>
             {' | '}
             <Link to="/staff/login" className="auth-link">Staff Portal</Link>
           </p>
@@ -170,12 +162,12 @@ const Login = () => {
       </div>
 
       <div className="auth-background">
-        <div className="bg-element bg-1"></div>
-        <div className="bg-element bg-2"></div>
+        <div className="bg-element bg-1" style={{ background: 'rgba(236, 72, 153, 0.15)' }}></div>
+        <div className="bg-element bg-2" style={{ background: 'rgba(244, 63, 94, 0.15)' }}></div>
         <div className="bg-element bg-3"></div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

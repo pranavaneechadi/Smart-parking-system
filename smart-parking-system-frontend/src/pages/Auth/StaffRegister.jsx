@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/Auth.css';
 
-const Register = () => {
+const StaffRegister = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
 
@@ -75,11 +75,12 @@ const Register = () => {
         formData.name,
         formData.email,
         formData.phone,
-        formData.password
+        formData.password,
+        'staff' // Explicitly sign up as Staff
       );
 
       if (data.success) {
-        navigate('/bookings');
+        navigate('/staff/dashboard');
       } else {
         setError(data.message || 'Registration failed.');
       }
@@ -94,9 +95,9 @@ const Register = () => {
     <div className="auth-container">
       <div className="auth-card register-card">
         <div className="auth-header">
-          <div className="auth-icon">🅿️</div>
+          <div className="auth-icon">📋</div>
           <h1>Smart Parking</h1>
-          <p>Create Account</p>
+          <p style={{ color: '#6366f1', fontWeight: 'bold' }}>Staff Registration</p>
         </div>
 
         {error && (
@@ -117,7 +118,7 @@ const Register = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleFormChange}
-                placeholder="Enter your full name"
+                placeholder="Enter full name"
                 disabled={loading}
                 autoComplete="name"
               />
@@ -134,7 +135,7 @@ const Register = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleFormChange}
-                placeholder="Enter your email"
+                placeholder="Enter email"
                 disabled={loading}
                 autoComplete="email"
               />
@@ -204,41 +205,42 @@ const Register = () => {
             type="submit"
             className="auth-button"
             disabled={loading}
+            style={{ background: 'linear-gradient(135deg, #6366f1, #4f46e5)' }}
           >
             {loading ? (
               <>
                 <span className="spinner-small"></span>
-                Creating Account...
+                Creating Staff Account...
               </>
             ) : (
-              'Create Account'
+              'Create Staff Account'
             )}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Already have an account?{' '}
-            <Link to="/login" className="auth-link">
+            Already have a Staff account?{' '}
+            <Link to="/staff/login" className="auth-link">
               Sign in here
             </Link>
           </p>
           <p style={{ marginTop: '10px' }}>
-            Portals:{' '}
-            <Link to="/admin/register" className="auth-link">Admin Registration</Link>
+            Switch Portal:{' '}
+            <Link to="/register" className="auth-link">User Registration</Link>
             {' | '}
-            <Link to="/staff/register" className="auth-link">Staff Registration</Link>
+            <Link to="/admin/register" className="auth-link">Admin Registration</Link>
           </p>
         </div>
       </div>
 
       <div className="auth-background">
-        <div className="bg-element bg-1"></div>
-        <div className="bg-element bg-2"></div>
+        <div className="bg-element bg-1" style={{ background: 'rgba(99, 102, 241, 0.15)' }}></div>
+        <div className="bg-element bg-2" style={{ background: 'rgba(79, 70, 229, 0.15)' }}></div>
         <div className="bg-element bg-3"></div>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default StaffRegister;

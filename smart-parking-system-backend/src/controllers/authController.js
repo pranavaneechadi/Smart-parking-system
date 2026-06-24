@@ -15,7 +15,7 @@ const generateToken = (userId, role) => {
 // @access  Public
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, phone, password } = req.body;
+    const { name, email, phone, password, role } = req.body;
 
     if (!name || !email || !phone || !password) {
       return res.status(400).json({
@@ -37,6 +37,7 @@ exports.registerUser = async (req, res) => {
       email,
       phone,
       password,
+      role: role || 'user',
       isVerified: true
     });
 

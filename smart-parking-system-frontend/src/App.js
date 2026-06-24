@@ -5,6 +5,11 @@ import { ThemeProvider } from './context/ThemeContext';
 
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+import AdminLogin from './pages/Auth/AdminLogin';
+import AdminRegister from './pages/Auth/AdminRegister';
+import StaffLogin from './pages/Auth/StaffLogin';
+import StaffRegister from './pages/Auth/StaffRegister';
+import LandingPage from './pages/LandingPage';
 
 import UserHome from './pages/User/UserHome';
 import UserParking from './pages/User/UserParking';
@@ -80,6 +85,22 @@ const AppRoutes = () => {
         path="/register"
         element={isAuthenticated ? <RedirectToDashboard /> : <Register />}
       />
+      <Route
+        path="/admin/login"
+        element={isAuthenticated ? <RedirectToDashboard /> : <AdminLogin />}
+      />
+      <Route
+        path="/admin/register"
+        element={isAuthenticated ? <RedirectToDashboard /> : <AdminRegister />}
+      />
+      <Route
+        path="/staff/login"
+        element={isAuthenticated ? <RedirectToDashboard /> : <StaffLogin />}
+      />
+      <Route
+        path="/staff/register"
+        element={isAuthenticated ? <RedirectToDashboard /> : <StaffRegister />}
+      />
 
       {/* User Routes */}
       <Route
@@ -152,7 +173,7 @@ const AppRoutes = () => {
       />
 
       {/* Default Routes */}
-      <Route path="/" element={<RedirectToDashboard />} />
+      <Route path="/" element={isAuthenticated ? <RedirectToDashboard /> : <LandingPage />} />
 
       {/* 404 Not Found */}
       <Route path="*" element={<Navigate to="/" replace />} />

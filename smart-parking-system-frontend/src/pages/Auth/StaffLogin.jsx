@@ -3,9 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/Auth.css';
 
-const Login = () => {
+const StaffLogin = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -52,12 +52,12 @@ const Login = () => {
 
       if (data.success) {
         const user = data.user;
-        if (user?.role === 'admin') {
-          navigate('/admin/dashboard');
-        } else if (user?.role === 'staff') {
+        if (user?.role === 'staff') {
           navigate('/staff/dashboard');
         } else {
-          navigate('/bookings');
+          // Force logout because they aren't staff
+          logout();
+          setError('You are not authorized to login as staff. Please use the User or Admin login portals.');
         }
       } else {
         setError(data.message || 'Login failed. Please try again.');
@@ -73,9 +73,9 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-icon">🅿️</div>
+          <div className="auth-icon">📋</div>
           <h1>Smart Parking</h1>
-          <p>Welcome Back</p>
+          <p style={{ color: '#6366f1', fontWeight: 'bold' }}>Staff Portal</p>
         </div>
 
         {error && (
@@ -96,7 +96,7 @@ const Login = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
+                placeholder="Enter staff email"
                 disabled={loading}
                 autoComplete="email"
               />
@@ -113,7 +113,7 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Enter your password"
+                placeholder="Enter staff password"
                 disabled={loading}
                 autoComplete="current-password"
               />
@@ -132,50 +132,42 @@ const Login = () => {
             type="submit"
             className="auth-button"
             disabled={loading}
+            style={{ background: 'linear-gradient(135deg, #6366f1, #4f46e5)' }}
           >
             {loading ? (
               <>
                 <span className="spinner-small"></span>
-                'Signing in...'
+                Signing in...
               </>
             ) : (
-              'Sign In'
+              'Sign In as Staff'
             )}
           </button>
         </form>
 
-        <div className="auth-demo">
-          <p>Use your registered account to continue.</p>
-        </div>
-
         <div className="auth-footer">
           <p>
-            Don't have an account?{' '}
-            <Link to="/register" className="auth-link">
-              Sign up here
-            </Link>
-          </p>
-          <p>
-            <Link to="/forgot-password" className="auth-link">
-              Forgot password?
+            Need a Staff account?{' '}
+            <Link to="/staff/register" className="auth-link">
+              Register here
             </Link>
           </p>
           <p style={{ marginTop: '10px' }}>
-            Portals:{' '}
-            <Link to="/admin/login" className="auth-link">Admin Portal</Link>
+            Switch Portal:{' '}
+            <Link to="/login" className="auth-link">User Portal</Link>
             {' | '}
-            <Link to="/staff/login" className="auth-link">Staff Portal</Link>
+            <Link to="/admin/login" className="auth-link">Admin Portal</Link>
           </p>
         </div>
       </div>
 
       <div className="auth-background">
-        <div className="bg-element bg-1"></div>
-        <div className="bg-element bg-2"></div>
+        <div className="bg-element bg-1" style={{ background: 'rgba(99, 102, 241, 0.15)' }}></div>
+        <div className="bg-element bg-2" style={{ background: 'rgba(79, 70, 229, 0.15)' }}></div>
         <div className="bg-element bg-3"></div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default StaffLogin;
