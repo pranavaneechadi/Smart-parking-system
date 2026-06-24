@@ -145,16 +145,7 @@ const Login = () => {
         </form>
 
         <div className="auth-demo">
-          <p>Demo Credentials:</p>
-          <div className="demo-user">
-            <strong>User:</strong> user@example.com / password123
-          </div>
-          <div className="demo-user">
-            <strong>Admin:</strong> admin@example.com / admin123
-          </div>
-          <div className="demo-user">
-            <strong>Staff:</strong> staff@example.com / staff123
-          </div>
+          <p>Use your registered account to continue.</p>
         </div>
 
         <div className="auth-footer">

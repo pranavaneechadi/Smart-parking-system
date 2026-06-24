@@ -31,7 +31,7 @@ const Navbar = () => {
         <nav className={`navbar ${theme}`}>
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo" onClick={() => setIsMenuOpen(false)}>
-                    <span className="logo-icon">🅿️</span>
+                    <span className="logo-icon">P</span>
                     <span className="logo-text">Smart Parking</span>
                 </Link>
 

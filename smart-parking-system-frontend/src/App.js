@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 
-// Auth Pages
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
-// User Pages
 import UserHome from './pages/User/UserHome';
 import UserParking from './pages/User/UserParking';
 import PaymentPage from './pages/User/PaymentPage';
@@ -15,16 +13,11 @@ import BookingHistory from './pages/User/BookingHistory';
 import Profile from './pages/User/Profile';
 import Support from './pages/User/Support';
 
-// Admin Pages
 import AdminDashboard from './pages/Admin/AdminDashboard';
 
-// Staff Pages
 import StaffDashboard from './pages/Staff/StaffDashboard';
 
-// Components
 import Navbar from './components/Navbar';
-
-// Protected Route Component
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { isAuthenticated, isAdmin, isStaff, loading } = useAuth();
 
@@ -47,7 +40,6 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   return children;
 };
 
-// Redirect Helper Component
 const RedirectToDashboard = () => {
   const { isAuthenticated, isAdmin, isStaff, loading } = useAuth();
 
@@ -70,7 +62,6 @@ const RedirectToDashboard = () => {
   return <Navigate to="/bookings" replace />;
 };
 
-// Main App Routes
 const AppRoutes = () => {
   const { isAuthenticated, loading } = useAuth();
 
@@ -171,7 +162,6 @@ const AppRoutes = () => {
 
 
 
-// Main App Component
 function App() {
   return (
     <Router>

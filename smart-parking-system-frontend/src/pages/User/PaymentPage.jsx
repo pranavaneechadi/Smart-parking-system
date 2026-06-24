@@ -174,7 +174,6 @@ const PaymentPage = () => {
     return (
         <div className="payment-page">
             <div className="payment-card">
-                {isDemoMode && <div className="demo-badge">Demo Mode</div>}
 
                 <div className="payment-header">
                     <h1>{isOverdue ? 'Overdue Fine ⚠️' : 'Secure Checkout 💳'}</h1>
@@ -246,7 +245,6 @@ const PaymentPage = () => {
                                     <div style={{ width: '32px', height: '32px', background: '#3b82f6', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyItems: 'center', fontWeight: 'bold', fontSize: '18px', justifyContent: 'center' }}>P</div>
                                     <div>
                                         <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Smart Parking</div>
-                                        <div style={{ fontSize: '10px', opacity: 0.7 }}>TEST MODE</div>
                                     </div>
                                 </div>
                                 <div style={{ fontWeight: '800', fontSize: '18px' }}>₹{amountToPay}</div>

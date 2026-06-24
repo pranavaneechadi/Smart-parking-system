@@ -16,12 +16,10 @@ const UserParking = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // DATA
   const [parkingLots, setParkingLots] = useState([]);
   const [selectedParking, setSelectedParking] = useState(null);
   const [slots, setSlots] = useState([]);
 
-  // Booking
   const [vehicleType, setVehicleType] = useState('fourWheeler');
   const [vehicleNumber, setVehicleNumber] = useState('');
   const [startTime, setStartTime] = useState('');
@@ -31,13 +29,11 @@ const UserParking = () => {
   const [radius, setRadius] = useState(5000); // Default to Anywhere (All India)
   const [userCoords, setUserCoords] = useState(null);
 
-  // UI
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [step, setStep] = useState('location'); // location -> parking -> slots
   const [bookingAmount, setBookingAmount] = useState(0);
 
-  // ================= FETCH PARKING =================
   const fetchNearbyParking = useCallback(async (coords, r) => {
     try {
       setLoading(true);
@@ -66,7 +62,6 @@ const UserParking = () => {
     }
   }, []);
 
-  // ================= GET LOCATION =================
   const getLocation = useCallback((forceRefresh = false) => {
     if (!navigator.geolocation) {
       setError('Geolocation not supported.');
@@ -111,9 +106,6 @@ const UserParking = () => {
     );
   }, [userCoords, radius, fetchNearbyParking]);
 
-  // ================= SIDE EFFECTS =================
-
-  // 1. Initial location fetch
   useEffect(() => {
     if (!user) {
       navigate('/login');
@@ -124,7 +116,6 @@ const UserParking = () => {
     }
   }, [user, userCoords, loading, getLocation, navigate]);
 
-  // 2. Search trigger when radius or coords change
   useEffect(() => {
     if (userCoords) {
       fetchNearbyParking(userCoords, radius);
@@ -153,7 +144,6 @@ const UserParking = () => {
     return () => clearInterval(interval);
   }, [selectedParking, step, vehicleType]);
 
-  // 3. Amount calculation
   useEffect(() => {
     if (selectedParking && duration) {
       const rate = selectedParking.hourlyRate || 60;
@@ -168,7 +158,6 @@ const UserParking = () => {
   }, [selectedParking, duration, durationUnit]);
 
 
-  // ================= HANDLERS =================
 
   const handleParkingSelect = async (parking) => {
     setSelectedParking(parking);
@@ -239,7 +228,6 @@ const UserParking = () => {
   };
 
 
-  // ================= UI RENDERING =================
   return (
     <div className="user-parking">
       <div className="parking-header">
@@ -299,7 +287,7 @@ const UserParking = () => {
                   }}
                   title="Use fixed location if GPS fails"
                 >
-                  📍 Use Demo Location
+                  📍 Use Sample Location
                 </button>
                 <button className="refresh-btn" onClick={() => getLocation(true)}>
                   🔄 Refresh

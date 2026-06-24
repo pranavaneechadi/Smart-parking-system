@@ -77,7 +77,6 @@ const UserHome = () => {
       </div>
 
       <div className="user-home-container">
-        {/* Quick Stats */}
         <section className="stats-section">
           <h2>Your Parking Stats</h2>
           {loading ? (
@@ -118,7 +117,6 @@ const UserHome = () => {
           )}
         </section>
 
-        {/* Quick Actions */}
         <section className="actions-section">
           <h2>Quick Actions</h2>
           <div className="actions-grid">
@@ -164,7 +162,6 @@ const UserHome = () => {
           </div>
         </section>
 
-        {/* Featured Info */}
         <section className="info-section">
           <h2>How it Works</h2>
           <div className="steps">
@@ -194,7 +191,6 @@ const UserHome = () => {
           </div>
         </section>
 
-        {/* Recent Activity */}
         {stats.totalBookings > 0 && (
           <section className="activity-section">
             <h2>Recent Activity</h2>
@@ -210,7 +206,6 @@ const UserHome = () => {
           </section>
         )}
 
-        {/* Empty State */}
         {stats.totalBookings === 0 && (
           <section className="empty-state">
             <div className="empty-icon">📅</div>
